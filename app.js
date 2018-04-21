@@ -36,7 +36,6 @@ var budgetController = (function () {
 		data.totals[type] = sum;
 	};
 	
-	
 	var data = {
 		allItems: {
 			exp: [],
@@ -72,7 +71,7 @@ var budgetController = (function () {
 			
 			// Add to the array data structure
 			data.allItems[type].push(newItem);
-			
+						
 			// return the new element
 			return newItem;
 		},
@@ -94,6 +93,13 @@ var budgetController = (function () {
 			if (index !== -1) {
 				data.allItems[type].splice(index, 1);
 			}
+		},
+		
+		// Working here
+		updateData: function() {
+			localStorage.setItem('exp', data);
+			localStorage.setItem('totalInc', data.totals.inc);
+			localStorage.setItem('totalExp', data.totals.exp);
 		},
 		
 		testing: function() {
@@ -356,7 +362,7 @@ var controller = (function (budgetCtrl, UICtrl) {
 		// 4. Update UI
 		UICtrl.displayPercentages(percentages);
 	}
-
+	
 	var ctrlAddItem = function () {
 		var input, newItem;
 		// 1. Get the filed input data
@@ -418,6 +424,7 @@ var controller = (function (budgetCtrl, UICtrl) {
 				totalInc: 0,
 				totalExp: 0
 			});
+			//budgetCtrl.saveData();
 			setEventListeners();
 		}
 	}
